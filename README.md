@@ -16,8 +16,7 @@ You may complete this assignment using jQuery or vanilla JavaScript. Please pick
 1. Construct a game board in your `index.html` to be your starting point on this project. Add your necessary HTML tags, including `script` and `link` tags to link to your separate JavaScript and CSS files respectively. The game board page should include the 3x3 grid (use Flexbox or perhaps research CSS grid!), and at minimum a reset button. Using `id` and `class` on clickable elements will help you wire this up in JavaScript afterwards.
 2. JavaScript portion will be next:
   * Until there is a winner, continue the game.
-  * You will need to keep track of the game state - what marks are on the board in what locations, as well as who's turn it is. There are many ways to do this. One way that seems to provide for a clean solution is through the use of a [two dimensional array](http://www.javascripttutorial.net/javascript-multidimensional-array/) representing the game board state.
-
+  * You will need to keep track of the game state - what marks are on the board in what locations, as well as who's turn it is. There are many ways to do this. One way that seems to provide for a clean solution is through the use of a [two dimensional array](http://www.javascripttutorial.net/javascript-multidimensional-array/) representing the game board state. But keep in mind, this is not the only way to solve this problem! It just might be a good thing to explore if you find yourself getting stuck.
 
 ## Bonus
 * Display a message to indicate which turn is about to be played.
