@@ -9,34 +9,23 @@
 * A cell should not be able to be replayed once marked.
 * Add a reset button that will clear the contents of the board.
 
+#### Note
+You may complete this assignment using jQuery or vanilla JavaScript. Please pick **one approach** for this project.
+
 ## How to get started
-1. Construct a `index.html` to be your starting point on this
-   project. Add your necessary HTML tags, including `script` and
-   `link` tags to link to your separate JavaScript and CSS files respectively.
-2. Construct the gameboard. The gameboard page should include the 3x3 grid,
-   and at minimum a reset button. Using `id` and `class` on clickable
-   elements will help you wire this up in JavaScript afterwards.
-3. JavaScript portion will be next:
-	* Locate the element first to use it within your app. Think about
-     using jQuery to locate your target elements.
-     Try this in your console to make sure your selection works.
-	* After finding the elements, start writing logic to listen for
-      `click` events on those elements.
-	* You will also need a variable to keep track of moves. As this
-      will be used to indicate whether or not to draw an `X` or an `O`.
+1. Construct a game board in your `index.html` to be your starting point on this project. Add your necessary HTML tags, including `script` and `link` tags to link to your separate JavaScript and CSS files respectively. The game board page should include the 3x3 grid (use Flexbox or perhaps research CSS grid!), and at minimum a reset button. Using `id` and `class` on clickable elements will help you wire this up in JavaScript afterwards.
+2. JavaScript portion will be next:
+  * Until there is a winner, continue the game.
+  * You will need to keep track of the game state - what marks are on the board in what locations, as well as who's turn it is. There are many ways to do this. One way that seems to provide for a clean solution is through the use of a [two dimensional array](http://www.javascripttutorial.net/javascript-multidimensional-array/) representing the game board state.
+
 
 ## Bonus
 * Display a message to indicate which turn is about to be played.
-* After the necessary moves have been played, stop game and alert the
-  winner if one player ends up winning with three in a row.
-    * Hint: Determine a set of winning combinations. Check those
-      combinations on the board contents after every move.
+* After the necessary moves have been played, stop game and alert the winner if one player ends up winning with three in a row.
+* Hint: Determine a set of winning combinations. Check those combinations on the board contents after every move.
 
 ## Ultra Bonus
-* We once had a student implement an Artifical Intelligence (AI)
-  opponent. If you really need a challenge, write some code that will
-  play a game of Tic Tac Toe against you. (Hint: look into the minimax
-  algorithm).
+* We once had a student implement an Artificial Intelligence (AI) opponent. If you really need a challenge, write some code that will play a game of Tic Tac Toe against you. (Hint: look into the minimax algorithm).
 
 ## Starter code
 
@@ -49,6 +38,10 @@ Please find some screenshots of what you'll be creating.  Feel free to get creat
 ![Screen-shot](assets/kz2L9f9.png)
 ![Screen-shot](assets/d8lFshD.png)
 ![Screen-shot](assets/Jw6hhcA.png)
+
+## Submission
+
+This lab is due **Sunday, May 6th by 11:00 PM**.
 
 ### Additional Resources
 
