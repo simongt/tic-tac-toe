@@ -17,12 +17,13 @@ h1 {
 .board {
   display: grid;
   grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;  /* ? */
   grid-gap: 24px;
   background-color: white;
   font-family: 'Luckiest Guy',
   cursive;
   color: white;
-  font-size: 96px;
+  font-size: 90px;
   text-align: center;
 }
 
@@ -42,7 +43,7 @@ h1 {
   background-color: blue;
 }
 
-
+/* 
 .box.top {}
 .box.top.x {}
 .box.top.o {}
@@ -73,4 +74,4 @@ h1 {
 
 .box.bottomright {}
 .box.bottomright.x {}
-.box.bottomright.o {}
+.box.bottomright.o {} */
