@@ -69,31 +69,28 @@ $(function() {
         // given each players' set, find all 3-number combinations
         if (whosTurn === 'X') {
           player.x.combos = getCombosOf(player.x.boxes, 3);
-          console.log(player.x.boxes);
-          console.log(player.x.combos);
+          // console.log(player.x.boxes);
+          // console.log(player.x.combos);
           // loop through each combo and see if it matches a winning combo
           if(checkForWinningCombo(player.x.combos)) {
-            // if player-x has won, then allow for no more turns
-            
+            // player-x has won, allow for no more turns
+            scoreBoard.xWins++; // update scoreboard
           }
         } else if (whosTurn === 'O') {
           player.o.combos = getCombosOf(player.o.boxes, 3);
-          console.log(player.o.boxes);
-          console.log(player.o.combos);
+          // console.log(player.o.boxes);
+          // console.log(player.o.combos);
           if (checkForWinningCombo(player.o.combos)) {
             // if player-o has won, then allow for no more turns
-
+            scoreBoard.oWins++; // update scoreboard
           }
         }
       }
       // 9 turns is the max per game
       if (countTurns >= numBoxes) {
         console.log(`There are ${numBoxes - countTurns} empty spaces and now the board is full. Moment of truth!`);
+        scoreBoard.ties++; // if no one won
       }
-      // Update scoreboard
-      // if no one won, scoreBoard.ties++;
-      // if player 1 won, scoreBoard.xWins++;
-      // if player 2 won, scoreBoard.oWins++;
     });
   }
   function createBox() {
