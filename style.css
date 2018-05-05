@@ -1,0 +1,76 @@
+body,
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: black;
+  overflow: hidden;
+}
+h1 {
+  font-family: 'Luckiest Guy',
+  cursive;
+  color: white;
+  font-size: 60px;
+  text-align: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 24px;
+  background-color: white;
+  font-family: 'Luckiest Guy',
+  cursive;
+  color: white;
+  font-size: 96px;
+  text-align: center;
+}
+
+.box {
+  background-color: black;
+  min-width: 96px;
+  min-height: 96px;
+  padding: 48px 12px 0px 12px;
+}
+
+.box.topleft {}
+.box.topleft.x {
+  background-color: red;
+}
+
+.box.topleft.o {
+  background-color: blue;
+}
+
+
+.box.top {}
+.box.top.x {}
+.box.top.o {}
+
+.box.topright {}
+.box.topright.x {}
+.box.topright.o {}
+
+.box.left {}
+.box.left.x {}
+.box.left.o {}
+
+.box.middle {}
+.box.middle.x {}
+.box.middle.o {}
+
+.box.right {}
+.box.right.x {}
+.box.right.o {}
+
+.box.bottomleft {}
+.box.bottomleft.x {}
+.box.bottomleft.o {}
+
+.box.bottom {}
+.box.bottom.x {}
+.box.bottom.o {}
+
+.box.bottomright {}
+.box.bottomright.x {}
+.box.bottomright.o {}
