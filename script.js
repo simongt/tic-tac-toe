@@ -2,7 +2,7 @@
 $(function() {
   let countTurns = 0;
   // keep a score
-  let scoreBoard = {
+  let score = {
     xWins: 0, // player 1
     oWins: 0, // player 2
     ties: 0
@@ -14,13 +14,13 @@ $(function() {
     x: {
       boxes: [],
       combos: [],
-      wins: scoreBoard.xWins // can just init with 0
+      wins: score.xWins // can just init with 0
    },
 
     o: {
       boxes: [],
       combos: [],
-      wins: scoreBoard.oWins // can just init with 0
+      wins: score.oWins // can just init with 0
     }   
   };
   // list of winning combos
@@ -36,68 +36,124 @@ $(function() {
   ];
   // grab the html body
   const $body = $('body');
-  const $gameName = $('<h1>');
-  // $gameName.addClass();
-  $gameName.text('tic-tac-toe');
-  $gameName.appendTo($body);
+  const $nameOfTheGame = $('<h1>');
+  
+  // insert game name as header
+  $nameOfTheGame.text('tic-tac-toe');
+  $nameOfTheGame.appendTo($body);
+
+  // above the grid, display who's turn it is
+  const $whosTurnIsIt = $('<p>');
+  $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'O' : 'X'}, it's your turn.`);
+  $whosTurnIsIt.appendTo($body);
 
   // create a grid that will act as a gameboard
   const $board = $('<div>');
   $board.addClass('board');
   $board.appendTo($body);
+
   // within this grid, there'll be 9 boxes (3x3)
   const numBoxes = 9;
-  for (let i = 0; i < numBoxes; i++) {
-    let $box = createBox();
-    // each time a box is clicked, it represents an entire player turn
-    let boxClick = $box.click(function() {
-      // enter x or o into box depending on player turn
-      countTurns % 2 ? $box.text('o') : $box.text('x');
-      // disable further clicks on box
-      $box.off();
-      // increment number of player turns
-      countTurns++;
-      let whosTurn = countTurns % 2 ? 'X' : 'O';
-      console.log(`Player-${whosTurn} clicked box ${i}. There are ${numBoxes - countTurns} remaining empty spaces.`);
-      if(whosTurn === 'X') {
-        player.x.boxes.push(i);
-        player.x.boxes.sort();
-      }
-      else if(whosTurn === 'O') {
-        player.o.boxes.push(i);
-        player.o.boxes.sort();
-      }
-      // the minimum number of turns to check for a winner is 5
-      if (countTurns >= 5) {
-        // check for winner
-        console.log(`[Check if Player-${whosTurn} is a winner]`);
-        // given each players' set, find all 3-number combinations
+  playRound();
+
+  function playRound() {
+    for (let i = 0; i < numBoxes; i++) {
+      // $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'O' : 'X'}, it's your turn.`);
+      let $box = createBox();
+      // each time a box is clicked, it represents an entire player turn
+      let boxClick = $box.click(function () {
+        // since a button is being clicked (player takes turn), toggle who's turn it is
+        $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'X' : 'O'}, it's your turn.`);
+        // enter x or o into box depending on player turn
+        countTurns % 2 ? $box.text('o') : $box.text('x');
+        // disable further clicks on box
+        $box.off();
+        // increment number of player turns
+        countTurns++;
+        let whosTurn = countTurns % 2 ? 'X' : 'O';
+        console.log(`Player-${whosTurn} clicked box ${i}. There are ${numBoxes - countTurns} remaining empty spaces.`);
         if (whosTurn === 'X') {
-          player.x.combos = getCombosOf(player.x.boxes, 3);
-          // console.log(player.x.boxes);
-          // console.log(player.x.combos);
-          // loop through each combo and see if it matches a winning combo
-          if(checkForWinningCombo(player.x.combos)) {
-            // player-x has won, allow for no more turns
-            scoreBoard.xWins++; // update scoreboard
-          }
-        } else if (whosTurn === 'O') {
-          player.o.combos = getCombosOf(player.o.boxes, 3);
-          // console.log(player.o.boxes);
-          // console.log(player.o.combos);
-          if (checkForWinningCombo(player.o.combos)) {
-            // if player-o has won, then allow for no more turns
-            scoreBoard.oWins++; // update scoreboard
+          player.x.boxes.push(i);
+          player.x.boxes.sort();
+        }
+        else if (whosTurn === 'O') {
+          player.o.boxes.push(i);
+          player.o.boxes.sort();
+        }
+        // the minimum number of turns to check for a winner is 5
+        if (countTurns >= 5) {
+          // check for winner
+          console.log(`[Check if Player-${whosTurn} is a winner]`);
+          // given each players' set, find all 3-number combinations
+          if (whosTurn === 'X') {
+            player.x.combos = getCombosOf(player.x.boxes, 3);
+            // console.log(player.x.boxes);
+            // console.log(player.x.combos);
+            // loop through each combo and see if it matches a winning combo
+            if (checkForWinningCombo(player.x.combos)) {
+              // player-x has won, allow for no more turns
+              score.xWins++; // update scoreboard
+            }
+          } else if (whosTurn === 'O') {
+            player.o.combos = getCombosOf(player.o.boxes, 3);
+            // console.log(player.o.boxes);
+            // console.log(player.o.combos);
+            if (checkForWinningCombo(player.o.combos)) {
+              // if player-o has won, then allow for no more turns
+              score.oWins++; // update scoreboard
+            }
           }
         }
-      }
-      // 9 turns is the max per game
-      if (countTurns >= numBoxes) {
-        console.log(`There are ${numBoxes - countTurns} empty spaces and now the board is full. Moment of truth!`);
-        scoreBoard.ties++; // if no one won
-      }
-    });
+        // 9 turns is the max per game
+        if (countTurns >= numBoxes) {
+          console.log(`There are ${numBoxes - countTurns} empty spaces and now the board is full.`);
+          score.ties++; // if no one won
+        }
+      });
+    }
   }
+
+  // button to clear board, start game over (keep scores)
+  const $clear = $('<button>');
+  $clear.addClass('clear');
+  $clear.text('clear');
+  $clear.click(function () {
+    console.log(score);
+    $board>$('.box').remove();
+    player = {
+      x: {
+        boxes: [],
+        combos: [],
+        wins: score.xWins // can just init with 0
+      },
+
+      o: {
+        boxes: [],
+        combos: [],
+        wins: score.oWins // can just init with 0
+      }
+    };
+    countTurns = 0;
+    playRound();
+  });
+  $clear.appendTo($body);
+
+  const $score = $('<div>');
+  $score.appendTo($body);
+
+  const $lineBreakTop = $('<hr>');
+  $lineBreakTop.appendTo($score);
+
+  const $scoreBoardTitle = $('<p>');
+  $scoreBoardTitle.text('Score Board').appendTo($score);
+
+  // |  X  |  Ties  |  O  |
+  // |-----|--------|-----|
+  // |  #  |    #   |     |
+
+  const $lineBreakBottom = $('<hr>');
+  $lineBreakBottom.appendTo($score);
+  
   function createBox() {
     let $newBox = $('<div>');
     $newBox.addClass('box');
