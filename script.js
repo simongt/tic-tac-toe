@@ -14,13 +14,13 @@ $(function() {
     x: {
       boxes: [],
       combos: [],
-      wins: score.xWins // can just init with 0
+      wins: score.xWins // do not just init with 0
    },
 
     o: {
       boxes: [],
       combos: [],
-      wins: score.oWins // can just init with 0
+      wins: score.oWins // do not just init with 0
     }   
   };
   // list of winning combos
@@ -91,23 +91,41 @@ $(function() {
             // console.log(player.x.combos);
             // loop through each combo and see if it matches a winning combo
             if (checkForWinningCombo(player.x.combos)) {
-              // player-x has won, allow for no more turns
               score.xWins++; // update scoreboard
+              updateScores();
+              alert(`Player ${whosTurn} has won. Congrats! Prepare for the next round.`);
+              // player-x has won, move on to the next round
+              setTimeout(function () {
+                clearBoard();
+              }, 500);
             }
           } else if (whosTurn === 'O') {
             player.o.combos = getCombosOf(player.o.boxes, 3);
             // console.log(player.o.boxes);
             // console.log(player.o.combos);
             if (checkForWinningCombo(player.o.combos)) {
-              // if player-o has won, then allow for no more turns
               score.oWins++; // update scoreboard
+              updateScores();
+              alert(`Player ${whosTurn} has won. Congrats! Prepare for the next round.`);
+              // player-o has won, move on to the next round
+              setTimeout(function () {
+                clearBoard();
+              }, 500);
             }
+          // 9 turns is the max per game
           }
-        }
-        // 9 turns is the max per game
-        if (countTurns >= numBoxes) {
-          console.log(`There are ${numBoxes - countTurns} empty spaces and now the board is full.`);
-          score.ties++; // if no one won
+          if (countTurns === numBoxes
+              && !checkForWinningCombo(player.x.combos)
+              && !checkForWinningCombo(player.o.combos)) {
+            console.log(`There are ${numBoxes - countTurns} empty spaces and now the board is full.`);
+            score.ties++; // if no one won
+            updateScores();
+            alert(`Woah Nelly, we have a tie! Prepare for the next round.`);
+            // no one has won, move on to the next round
+            setTimeout(function () {
+              clearBoard();
+            }, 500);
+          }
         }
       });
     }
@@ -119,40 +137,58 @@ $(function() {
   $clear.text('clear');
   $clear.click(function () {
     console.log(score);
+    clearBoard();
+  });
+  $clear.appendTo($body);
+
+  function clearBoard() {
     $board>$('.box').remove();
     player = {
       x: {
         boxes: [],
         combos: [],
-        wins: score.xWins // can just init with 0
+        wins: score.xWins
       },
 
       o: {
         boxes: [],
         combos: [],
-        wins: score.oWins // can just init with 0
+        wins: score.oWins
       }
     };
     countTurns = 0;
     playRound();
-  });
-  $clear.appendTo($body);
-
-  const $score = $('<div>');
-  $score.appendTo($body);
-
-  const $lineBreakTop = $('<hr>');
-  $lineBreakTop.appendTo($score);
-
-  const $scoreBoardTitle = $('<p>');
-  $scoreBoardTitle.text('Score Board').appendTo($score);
+  }
 
   // |  X  |  Ties  |  O  |
   // |-----|--------|-----|
   // |  #  |    #   |     |
 
-  const $lineBreakBottom = $('<hr>');
-  $lineBreakBottom.appendTo($score);
+  const $scoreBoardTitle = $('<p>');
+  $scoreBoardTitle.text('Score Board');
+  $scoreBoardTitle.appendTo($body);
+
+  const $score = $('<div>');
+  $score.addClass('score');
+  $score.appendTo($body);
+  const $xLabel = $('<p>').text('X');
+  $xLabel.appendTo($score);
+  const $tLabel = $('<p>').text('Ties');
+  $tLabel.appendTo($score);
+  const $oLabel = $('<p>').text('O');
+  $oLabel.appendTo($score);
+  const $xScore = $('<div>').text(score.xWins);
+  $xScore.appendTo($score);
+  const $tScore = $('<div>').text(score.ties);
+  $tScore.appendTo($score);
+  const $oScore = $('<div>').text(score.oWins);
+  $oScore.appendTo($score);
+
+  function updateScores() {
+    $xScore.text(score.xWins);
+    $tScore.text(score.ties);
+    $oScore.text(score.oWins);
+  }
   
   function createBox() {
     let $newBox = $('<div>');

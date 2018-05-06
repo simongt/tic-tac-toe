@@ -69,12 +69,12 @@ p {
 }
 
 .box:hover {
-
+  /* later: add an opaque x or o depending on who's turn it is */
 }
 
 .clear {
   display: block;
-  margin: 36px auto auto auto;
+  margin: 36px auto;
   font-family: 'Luckiest Guy', cursive;
   color: white;
   background: black;
@@ -89,54 +89,28 @@ p {
   cursor: pointer;
 }
 .clear:visited {
-
+ /* later: remove the border around the clear button when it's clicked */
 }
 
-/* .score {
+/* Credit styling idea to Ibrahim Jabbari (Codepen) */
+/* https://codepen.io/ibrahimjabbari/pen/ozinB?editors=0100 */
+.score {
+  display: grid;
+  margin: auto;
+  padding: 0 36px 24px 36px;
+  width: 360px;
+  height: auto;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  grid-gap: 24px;
+  font-family: 'Luckiest Guy', cursive;
+  color: white;
+  font-size: 144px;
+  font-weight: 900;
+  line-height: 60px;
+  text-align: center;
   border-style: solid;
   border-color: white;
-  border-width: 1px 0 1px 0;
-  border-radius: 36px;
-} */
-
-/* 
-.box.topleft {}
-.box.topleft.x {
-  background-color: red;
+  border-width: 0 18px 0 18px;
+  border-radius: 72px;
 }
-
-.box.topleft.o {
-  background-color: blue;
-}
-
-.box.top {}
-.box.top.x {}
-.box.top.o {}
-
-.box.topright {}
-.box.topright.x {}
-.box.topright.o {}
-
-.box.left {}
-.box.left.x {}
-.box.left.o {}
-
-.box.middle {}
-.box.middle.x {}
-.box.middle.o {}
-
-.box.right {}
-.box.right.x {}
-.box.right.o {}
-
-.box.bottomleft {}
-.box.bottomleft.x {}
-.box.bottomleft.o {}
-
-.box.bottom {}
-.box.bottom.x {}
-.box.bottom.o {}
-
-.box.bottomright {}
-.box.bottomright.x {}
-.box.bottomright.o {} */
