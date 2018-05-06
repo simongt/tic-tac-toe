@@ -36,6 +36,11 @@ $(function() {
   ];
   // grab the html body
   const $body = $('body');
+  const $gameName = $('<h1>');
+  // $gameName.addClass();
+  $gameName.text('tic-tac-toe');
+  $gameName.appendTo($body);
+
   // create a grid that will act as a gameboard
   const $board = $('<div>');
   $board.addClass('board');
