@@ -57,6 +57,7 @@ $(function() {
   playRound();
 
   function playRound() {
+    // iterate through grid to make each box playable
     for (let i = 0; i < numBoxes; i++) {
       // $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'O' : 'X'}, it's your turn.`);
       let $box = createBox();
@@ -73,10 +74,12 @@ $(function() {
         let whosTurn = countTurns % 2 ? 'X' : 'O';
         console.log(`Player-${whosTurn} clicked box ${i}. There are ${numBoxes - countTurns} remaining empty spaces.`);
         if (whosTurn === 'X') {
+          $box.addClass('x');
           player.x.boxes.push(i);
           player.x.boxes.sort();
         }
         else if (whosTurn === 'O') {
+          $box.addClass('o');
           player.o.boxes.push(i);
           player.o.boxes.sort();
         }
@@ -97,7 +100,7 @@ $(function() {
               // player-x has won, move on to the next round
               setTimeout(function () {
                 clearBoard();
-              }, 500);
+              }, 2000);
             }
           } else if (whosTurn === 'O') {
             player.o.combos = getCombosOf(player.o.boxes, 3);
@@ -110,7 +113,7 @@ $(function() {
               // player-o has won, move on to the next round
               setTimeout(function () {
                 clearBoard();
-              }, 500);
+              }, 2000);
             }
           // 9 turns is the max per game
           }
@@ -124,7 +127,7 @@ $(function() {
             // no one has won, move on to the next round
             setTimeout(function () {
               clearBoard();
-            }, 500);
+            }, 2000);
           }
         }
       });
@@ -164,26 +167,22 @@ $(function() {
   // |-----|--------|-----|
   // |  #  |    #   |     |
 
-  const $scoreBoardTitle = $('<p>');
-  $scoreBoardTitle.text('Score Board');
-  $scoreBoardTitle.appendTo($body);
+  // const $scoreBoardTitle = $('<p>');
+  // $scoreBoardTitle.text('Score Board');
+  // $scoreBoardTitle.appendTo($body);
 
   const $score = $('<div>');
   $score.addClass('score');
   $score.appendTo($body);
-  const $xLabel = $('<p>').text('X');
+  const $xLabel = $('<h2>').text('X');
   $xLabel.appendTo($score);
-  const $tLabel = $('<p>').text('Ties');
+  const $tLabel = $('<h2>').text('Ties');
   $tLabel.appendTo($score);
-  const $oLabel = $('<p>').text('O');
+  const $oLabel = $('<h2>').text('O');
   $oLabel.appendTo($score);
-  const $xScore = $('<div>').text(score.xWins);
-  $xScore.appendTo($score);
-  const $tScore = $('<div>').text(score.ties);
-  $tScore.appendTo($score);
-  const $oScore = $('<div>').text(score.oWins);
-  $oScore.appendTo($score);
-
+  const $xScore = $('<div>').text(score.xWins).addClass('x').appendTo($score);
+  const $tScore = $('<div>').text(score.ties).addClass('tie').appendTo($score);
+  const $oScore = $('<div>').text(score.oWins).addClass('o').appendTo($score);
   function updateScores() {
     $xScore.text(score.xWins);
     $tScore.text(score.ties);
@@ -204,19 +203,26 @@ $(function() {
           (combo[1] === winningCombo[1]) &&
           (combo[2] === winningCombo[2])) {
           console.log(`${combo} is a winning combo!!`);
+          animateWinningCombo(combo);
           return true;
         } else {
-          console.log(`${combo} is not a winning combo.`);
+          // console.log(`${combo} is not a winning combo.`);
         }
-        // if (winningCombos.includes(combo)) {
-        //   console.log(`Winning combo found! ${combo}`);
-        //   return true;
-        // } else {
-        //   console.log(`${combo} is not a combo.`);
-        // }
       }
     }
     return false;
+  }
+
+  function animateWinningCombo(combo) {
+    let comboBoxes = document.querySelectorAll('.board>.box'); // how to do in jQuery?
+    console.log(comboBoxes);
+    /* toggle color */
+    for (let i = 0; i < combo.length; i++) {
+      console.log(`[Toggle color for ${combo[i]} to cyan]`);
+      console.log(comboBoxes[combo[i]]);
+      // comboBoxes[i].addClass('combo');
+      comboBoxes[combo[i]].setAttribute('class', 'box combo'); // how to do in jQuery?
+    }
   }
 
   // Akseli Palén's solution for calculating combinations of elements in Array

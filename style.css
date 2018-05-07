@@ -8,11 +8,19 @@ html {
 }
 h1 {
   font-family: 'Luckiest Guy', cursive;
-  color: white;
+  color: magenta;
   font-size: 72px;
   text-align: center;
   letter-spacing: 2px;
   margin-bottom: -1rem;
+}
+h2 {
+  font-family: 'Luckiest Guy', cursive;
+  color: white;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
 }
 p {
   font-family: 'Luckiest Guy', cursive;
@@ -32,14 +40,8 @@ p {
    */
   width: 480px;
   height: 480px;
-
   grid-template-columns: auto auto auto;
   grid-template-rows: auto auto auto;
-  /* ? */
-  /* grid-template-columns: 144px 144px 144px; */
-  /* grid-template-rows: 144px 144px 144px; */
-
-  /* ? */
   grid-gap: 24px;
   background-color: white;
   font-family: 'Luckiest Guy', cursive;
@@ -55,26 +57,31 @@ p {
   width: 144px;
   height: 144px;
   cursor: pointer;
-
-  /* ? */
-  /* position: relative; */
-  /* top: 50%; */
-  /* transform: translateY(-50%); */
-  /* ? */
-  /* text-align: center; */
-  /* vertical-align: middle; */
-  /* line-height: 144px; */
-  /* ? */
-  /* padding: 24px 12px 0px 12px; */
 }
 
 .box:hover {
   /* later: add an opaque x or o depending on who's turn it is */
 }
 
+.box.x {
+  color: cyan;
+}
+
+.box.tie {
+  color: white;
+}
+
+.box.o {
+  color: yellow;
+}
+
+.box.combo {
+  color: magenta;
+}
+
 .clear {
   display: block;
-  margin: 36px auto;
+  margin: 24px auto;
   font-family: 'Luckiest Guy', cursive;
   color: white;
   background: black;
@@ -96,7 +103,7 @@ p {
 /* https://codepen.io/ibrahimjabbari/pen/ozinB?editors=0100 */
 .score {
   display: grid;
-  margin: auto;
+  margin: -0.1em auto;
   padding: 0 36px 24px 36px;
   width: 360px;
   height: auto;
@@ -113,4 +120,17 @@ p {
   border-color: white;
   border-width: 0 18px 0 18px;
   border-radius: 72px;
+}
+.x {
+
+  color: cyan;
+}
+
+.tie {
+
+  color: white;
+}
+
+.o {
+  color: yellow;
 }
