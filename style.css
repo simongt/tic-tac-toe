@@ -6,6 +6,7 @@ html {
   background: black;
   overflow: hidden;
 }
+
 h1 {
   font-family: 'Luckiest Guy', cursive;
   color: magenta;
@@ -14,6 +15,7 @@ h1 {
   letter-spacing: 2px;
   margin-bottom: -1.5rem;
 }
+
 h2 {
   font-family: 'Luckiest Guy', cursive;
   color: white;
@@ -22,6 +24,7 @@ h2 {
   letter-spacing: 1px;
   margin-bottom: 0.75rem;
 }
+
 p {
   font-family: 'Open Sans', sans-serif;
   color: white;
@@ -29,6 +32,7 @@ p {
   text-align: center;
   letter-spacing: 1px;
 }
+
 .board {
   display: grid;
   margin: auto;
@@ -88,22 +92,22 @@ p {
   border: 1px solid white;
   border-radius: 12px;
   padding: 12px 24px 0 24px;
-
   font-size: 36px;
   line-height: 60px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
 }
+
 .clear:visited {
  /* later: remove the border around the clear button when it's clicked */
 }
 
-/* Credit styling idea to Ibrahim Jabbari (Codepen) */
+/* Credit some of styling idea to Ibrahim Jabbari (Codepen) */
 /* https://codepen.io/ibrahimjabbari/pen/ozinB?editors=0100 */
 .score {
   display: grid;
-  margin: -0.1em auto;
+  margin: -0.25em auto;
   padding: 0 36px 24px 36px;
   width: 360px;
   height: auto;
@@ -121,13 +125,12 @@ p {
   border-width: 0 18px 0 18px;
   border-radius: 72px;
 }
-.x {
 
+.x {
   color: cyan;
 }
 
 .tie {
-
   color: white;
 }
 

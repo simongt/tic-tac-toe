@@ -16,7 +16,6 @@ $(function() {
       combos: [],
       wins: score.xWins // do not just init with 0
    },
-
     o: {
       boxes: [],
       combos: [],
@@ -54,6 +53,7 @@ $(function() {
 
   // within this grid, there'll be 9 boxes (3x3)
   const numBoxes = 9;
+  // let gameBoxes = [];
   playRound();
 
   function playRound() {
@@ -61,6 +61,7 @@ $(function() {
     for (let i = 0; i < numBoxes; i++) {
       // $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'O' : 'X'}, it's your turn.`);
       let $box = createBox();
+      // gameBoxes.push($box);
       // each time a box is clicked, it represents an entire player turn
       let boxClick = $box.click(function () {
         // since a button is being clicked (player takes turn), toggle who's turn it is
@@ -170,9 +171,9 @@ $(function() {
   // |-----|--------|-----|
   // |  #  |    #   |     |
 
-  // const $scoreBoardTitle = $('<p>');
-  // $scoreBoardTitle.text('Score Board');
-  // $scoreBoardTitle.appendTo($body);
+  const $scoreBoardTitle = $('<p>');
+  $scoreBoardTitle.text('SCORE BOARD');
+  $scoreBoardTitle.appendTo($body);
 
   const $score = $('<div>');
   $score.addClass('score');
@@ -227,6 +228,14 @@ $(function() {
       comboBoxes[combo[i]].setAttribute('class', 'box combo'); // how to do in jQuery?
     }
   }
+
+  // disable clicking on all the boxes
+  // funtion pauseTurns() {
+  //   console.log(gameBoxes);
+  //   // for (let i=0; i<gameBoxes.length; i++) {
+  //   //   $gameBoxes[i].off();
+  //   // }
+  // }
 
   // Akseli Palén's solution for calculating combinations of elements in Array
   // Github: https://gist.github.com/axelpale/3118596
