@@ -102,6 +102,7 @@ $(function() {
               // player-x has won, move on to the next round
               setTimeout(function () {
                 clearBoard();
+                $body.removeClass('avoidClicks');
               }, 2000);
             }
           } else if (whosTurn === 'O') {
@@ -116,6 +117,7 @@ $(function() {
               // player-o has won, move on to the next round
               setTimeout(function () {
                 clearBoard();
+                $body.removeClass('avoidClicks');
               }, 2000);
             }
           // 9 turns is the max per game
@@ -130,7 +132,8 @@ $(function() {
             // no one has won, move on to the next round
             setTimeout(function () {
               clearBoard();
-            }, 2000);
+              $body.removeClass('avoidClicks');
+            }, 3000);
           }
         }
       });
@@ -207,6 +210,7 @@ $(function() {
           (combo[1] === winningCombo[1]) &&
           (combo[2] === winningCombo[2])) {
           console.log(`${combo} is a winning combo!!`);
+          noMoreTurnsAllowed();
           animateWinningCombo(combo);
           return true;
         } else {
@@ -224,18 +228,17 @@ $(function() {
     for (let i = 0; i < combo.length; i++) {
       console.log(`[Toggle color for ${combo[i]} to cyan]`);
       console.log(comboBoxes[combo[i]]);
-      // comboBoxes[i].addClass('combo');
+      // comboBoxes[combo[i]].addClass('combo');
       comboBoxes[combo[i]].setAttribute('class', 'box combo'); // how to do in jQuery?
     }
   }
 
   // disable clicking on all the boxes
-  // funtion pauseTurns() {
-  //   console.log(gameBoxes);
-  //   // for (let i=0; i<gameBoxes.length; i++) {
-  //   //   $gameBoxes[i].off();
-  //   // }
-  // }
+  // thanks to Rachel, see: https://css-tricks.com/almanac/properties/p/pointer-events/
+  function noMoreTurnsAllowed() {
+    $body.addClass('avoidClicks'); // NOT WORKING
+    console.log($body);
+  }
 
   // Akseli Palén's solution for calculating combinations of elements in Array
   // Github: https://gist.github.com/axelpale/3118596

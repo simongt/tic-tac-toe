@@ -56,6 +56,10 @@ p {
   text-align: center;
 }
 
+.avoidClicks {
+  pointer-events: none;
+}
+
 .box {
   background-color: black;
   width: 144px;
