@@ -44,7 +44,7 @@ $(function() {
 
   // above the grid, display who's turn it is
   const $whosTurnIsIt = $('<p>');
-  $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'O' : 'X'}, it's your turn.`);
+  $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'O' : 'X'}, it's your turn. Select a box.`);
   $whosTurnIsIt.appendTo($body);
 
   // create a grid that will act as a gameboard
@@ -64,7 +64,7 @@ $(function() {
       // each time a box is clicked, it represents an entire player turn
       let boxClick = $box.click(function () {
         // since a button is being clicked (player takes turn), toggle who's turn it is
-        $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'X' : 'O'}, it's your turn.`);
+        $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'X' : 'O'}, it's your turn. Select a box.`);
         // enter x or o into box depending on player turn
         countTurns % 2 ? $box.text('o') : $box.text('x');
         // disable further clicks on box
@@ -96,7 +96,8 @@ $(function() {
             if (checkForWinningCombo(player.x.combos)) {
               score.xWins++; // update scoreboard
               updateScores();
-              alert(`Player ${whosTurn} has won. Congrats! Prepare for the next round.`);
+              $whosTurnIsIt.text(`Player ${whosTurn} won in ${countTurns} moves. Prepare for the next round.`);
+              console.log(`Player ${whosTurn} has won. Congrats! Prepare for the next round.`);
               // player-x has won, move on to the next round
               setTimeout(function () {
                 clearBoard();
@@ -109,7 +110,8 @@ $(function() {
             if (checkForWinningCombo(player.o.combos)) {
               score.oWins++; // update scoreboard
               updateScores();
-              alert(`Player ${whosTurn} has won. Congrats! Prepare for the next round.`);
+              $whosTurnIsIt.text(`Player ${whosTurn} won in ${countTurns} moves. Prepare for the next round.`);
+              console.log(`Player ${whosTurn} has won. Congrats! Prepare for the next round.`);
               // player-o has won, move on to the next round
               setTimeout(function () {
                 clearBoard();
@@ -123,7 +125,7 @@ $(function() {
             console.log(`There are ${numBoxes - countTurns} empty spaces and now the board is full.`);
             score.ties++; // if no one won
             updateScores();
-            alert(`Woah Nelly, we have a tie! Prepare for the next round.`);
+            $whosTurnIsIt.text(`We have a tie! Prepare for the next round.`)
             // no one has won, move on to the next round
             setTimeout(function () {
               clearBoard();
@@ -160,6 +162,7 @@ $(function() {
       }
     };
     countTurns = 0;
+    $whosTurnIsIt.text(`Player ${countTurns % 2 ? 'O' : 'X'}, it's your turn.`);
     playRound();
   }
 
