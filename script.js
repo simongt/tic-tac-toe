@@ -1,4 +1,3 @@
-// $(document).ready(function () {
 $(function() {
   let countTurns = 0;
   // keep a score
@@ -50,12 +49,17 @@ $(function() {
   const $board = $('<div>');
   $board.addClass('board');
   $board.appendTo($body);
+ 
+  function createBox() {
+    let $newBox = $('<div>');
+    $newBox.addClass('box');
+    $newBox.appendTo($board);
+    return $newBox;
+  }
 
   // within this grid, there'll be 9 boxes (3x3)
   const numBoxes = 9;
-  // let gameBoxes = [];
-  playRound();
-
+  // the 9 boxes will be re-generated with each round
   function playRound() {
     // iterate through grid to make each box playable
     for (let i = 0; i < numBoxes; i++) {
@@ -140,6 +144,8 @@ $(function() {
     }
   }
 
+  playRound();
+
   // button to clear board, start game over (keep scores)
   const $clear = $('<button>');
   $clear.addClass('clear');
@@ -150,6 +156,7 @@ $(function() {
   });
   $clear.appendTo($body);
 
+  // clear board, start game over (keep scores)
   function clearBoard() {
     $board>$('.box').remove();
     player = {
@@ -158,7 +165,6 @@ $(function() {
         combos: [],
         wins: score.xWins
       },
-
       o: {
         boxes: [],
         combos: [],
@@ -170,23 +176,19 @@ $(function() {
     playRound();
   }
 
+  // score board
   // |  X  |  Ties  |  O  |
   // |-----|--------|-----|
-  // |  #  |    #   |     |
+  // |  #  |    #   |  #  |
 
   const $scoreBoardTitle = $('<p>');
   $scoreBoardTitle.text('SCORE BOARD');
   $scoreBoardTitle.appendTo($body);
 
-  const $score = $('<div>');
-  $score.addClass('score');
-  $score.appendTo($body);
-  const $xLabel = $('<h2>').text('X');
-  $xLabel.appendTo($score);
-  const $tLabel = $('<h2>').text('Ties');
-  $tLabel.appendTo($score);
-  const $oLabel = $('<h2>').text('O');
-  $oLabel.appendTo($score);
+  const $score = $('<div>').addClass('score').appendTo($body);
+  const $xLabel = $('<h2>').text('X').appendTo($score);
+  const $tLabel = $('<h2>').text('Ties').appendTo($score);
+  const $oLabel = $('<h2>').text('O').appendTo($score);
   const $xScore = $('<div>').text(score.xWins).addClass('x').appendTo($score);
   const $tScore = $('<div>').text(score.ties).addClass('tie').appendTo($score);
   const $oScore = $('<div>').text(score.oWins).addClass('o').appendTo($score);
@@ -196,13 +198,6 @@ $(function() {
     $oScore.text(score.oWins);
   }
   
-  function createBox() {
-    let $newBox = $('<div>');
-    $newBox.addClass('box');
-    $newBox.appendTo($board);
-    return $newBox;
-  }
-
   function checkForWinningCombo(combos) {
     for (const combo of combos) { // player combos
       for (const winningCombo of winningCombos) { // winning combos
@@ -298,4 +293,35 @@ $(function() {
     }
     return combos;
   }
+
+    /*
+        [ My attempt to implement AI so that player-o is the computer ]
+
+        // https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/
+
+        Minimax:
+          To check whether or not the current move is better than the best move we take the help of minimax()
+        function which will consider all the possible ways the game can go and returns the best value
+        for that move, assuming the opponent also plays optimally. The code for the maximizer and minimizer in the minimax() function is similar to findBestMove(), the only difference is, instead of returning a move, it will return a value. 
+        
+        Here is the pseudocode:
+
+          function minimax(board, depth, isMaximizingPlayer):
+
+          if current board state is a terminal state:
+            return value of the board
+
+          if isMaximizingPlayer:
+            bestVal = -INFINITY
+            for each move in board:
+              value = minimax(board, depth + 1, false)
+              bestVal = max(bestVal, value)
+            return bestVal
+          else:
+            bestVal = +INFINITY
+            for each move in board:
+              value = minimax(board, depth + 1, true)
+              bestVal = min(bestVal, value)
+            return bestVal
+     */
 });
