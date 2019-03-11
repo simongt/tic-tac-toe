@@ -1,2 +1,5 @@
 *.zip
 package-lock.json
+paris-solution.zip
+/js-tic-tac-toe-lab-paris-solution
+.DS_Store
