@@ -2,6 +2,10 @@
 
 This is a recreation of the classic game **Tic-Tac-Toe**. I built it with JavaScript (jQuery), while using CSS Grid to create the gameboard layout.
 
+<p align="center">
+  <img src="https://simongt.net/img/bits/tic-tac-toe.gif" alt="Tic-Tac-Toe" />
+</p>
+
 ## Game Components
 * A user is able to click on different squares to make a move.
 * Every click alternates turns between Player 1 or Player 2.
@@ -20,4 +24,4 @@ This is a recreation of the classic game **Tic-Tac-Toe**. I built it with JavaSc
 
 #### Note
 
-This project was completed using jQuery, however I intend to refactor it using only vanilla JavaScript (and move the jQuery version into a separate branch).
+This project was implemented using jQuery, however I intend to refactor it using only vanilla JavaScript (and move the jQuery version into a separate branch).
